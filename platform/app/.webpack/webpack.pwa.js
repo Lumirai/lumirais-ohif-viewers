@@ -70,6 +70,8 @@ module.exports = (env, argv) => {
         // Hoisted Yarn Workspace Modules
         path.resolve(__dirname, '../../../node_modules'),
         SRC_DIR,
+        path.resolve(__dirname, '../lumirais-ohif-plugins/mode-present/node_modules'),
+        path.resolve(__dirname, '../lumirais-ohif-plugins/ext-lumirai/node_modules'),
       ],
     },
     plugins: [
