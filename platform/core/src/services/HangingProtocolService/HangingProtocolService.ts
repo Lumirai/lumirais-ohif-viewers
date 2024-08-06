@@ -1259,9 +1259,9 @@ export default class HangingProtocolService extends PubSubService {
           const match = matchDetails.matchingScores[i];
           return match.matchingScore > 0
             ? {
-                matchingScores,
-                ...matchDetails.matchingScores[i],
-              }
+              matchingScores,
+              ...matchDetails.matchingScores[i],
+            }
             : null;
         }
       }
@@ -1474,6 +1474,12 @@ export default class HangingProtocolService extends PubSubService {
     console.log('ProtocolEngine::matchImages', studyMatchingRules, seriesMatchingRules);
     const matchActiveOnly = this.protocol.numberOfPriorsReferenced === -1;
     this.studies.forEach((study, studyInstanceUIDsIndex) => {
+
+      // Skip if study is undefined
+      if (!study) {
+        return;
+      }
+
       // Skip non-active if active only
       if (matchActiveOnly && this.activeStudy !== study) {
         return;
