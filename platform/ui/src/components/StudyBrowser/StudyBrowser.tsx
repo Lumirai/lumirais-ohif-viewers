@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
+import { utils } from '@ohif/core';
 
 import StudyItem from '../StudyItem';
 import LegacyButtonGroup from '../LegacyButtonGroup';
@@ -8,6 +9,8 @@ import LegacyButton from '../LegacyButton';
 import ThumbnailList from '../ThumbnailList';
 import { StringNumber } from '../../types';
 import StudyBrowserSort from '../StudyBrowserSort';
+
+const { sortStudySeries } = utils;
 
 const getTrackedSeries = displaySets => {
   let trackedSeries = 0;
@@ -36,7 +39,7 @@ const StudyBrowser = ({
 }: withAppTypes) => {
   const { t } = useTranslation('StudyBrowser');
   const { customizationService } = servicesManager?.services || {};
-
+  const { experimentalStudyBrowserSort } = window.config;
   const getTabContent = () => {
     const tabData = tabs.find(tab => tab.name === activeTabName);
 
@@ -52,6 +55,9 @@ const StudyBrowser = ({
 
     return tabData.studies.map(
       ({ studyInstanceUid, date, description, numInstances, modalities, displaySets }) => {
+        if (!experimentalStudyBrowserSort) {
+          sortStudySeries(displaySets);
+        }
         const isExpanded = expandedStudyInstanceUIDs.includes(studyInstanceUid);
         return (
           <React.Fragment key={studyInstanceUid}>
@@ -124,9 +130,7 @@ const StudyBrowser = ({
             );
           })}
         </LegacyButtonGroup>
-        {window.config.experimentalStudyBrowserSort && (
-          <StudyBrowserSort servicesManager={servicesManager} />
-        )}
+        {experimentalStudyBrowserSort && <StudyBrowserSort servicesManager={servicesManager} />}
       </div>
       <div className="ohif-scrollbar invisible-scrollbar flex flex-1 flex-col overflow-auto">
         {getTabContent()}
