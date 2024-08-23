@@ -126,7 +126,7 @@ function ToolbarLayoutSelectorWithServices({
 function LayoutSelector({
   rows = 3,
   columns = 4,
-  onLayoutChange = () => {},
+  onLayoutChange = () => { },
   className,
   onSelection,
   onSelectionPreset,
@@ -183,7 +183,7 @@ function LayoutSelector({
             ref={dropdownRef}
           >
             <div className="bg-secondary-dark flex flex-col gap-2.5 p-2">
-              <div className="text-aqua-pale text-xs">Common</div>
+              <div className="text-aqua-pale ">Common</div>
 
               <div className="flex gap-4">
                 {commonPresets.map((preset, index) => (
@@ -197,27 +197,14 @@ function LayoutSelector({
                 ))}
               </div>
 
-              <div className="h-[2px] bg-black"></div>
 
-              <div className="text-aqua-pale text-xs">Advanced</div>
 
-              <div className="flex flex-col gap-2.5">
-                {advancedPresets.map((preset, index) => (
-                  <LayoutPreset
-                    key={index + commonPresets.length}
-                    classNames="hover:bg-primary-dark group flex gap-2 p-1 cursor-pointer"
-                    icon={preset.icon}
-                    title={preset.title}
-                    disabled={preset.disabled}
-                    commandOptions={preset.commandOptions}
-                    onSelection={onSelectionPreset}
-                  />
-                ))}
-              </div>
+
+
             </div>
 
             <div className="bg-primary-dark flex flex-col gap-2.5 border-l-2 border-solid border-black  p-2">
-              <div className="text-aqua-pale text-xs">Custom</div>
+              <div className="text-aqua-pale ">Custom</div>
               <DropdownContent
                 rows={rows}
                 columns={columns}
