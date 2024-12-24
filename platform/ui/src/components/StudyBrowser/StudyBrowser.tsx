@@ -23,7 +23,7 @@ const getTrackedSeries = displaySets => {
   return trackedSeries;
 };
 
-const noop = () => { };
+const noop = () => {};
 
 const StudyBrowser = ({
   tabs,
@@ -45,13 +45,14 @@ const StudyBrowser = ({
 
     // soft tabData.studies by date
     tabData.studies.sort((a, b) => {
-      let aa = new Date(a.date).getTime();
-      let bb = new Date(b.date).getTime();
+      const aa = new Date(a.date).getTime();
+      const bb = new Date(b.date).getTime();
 
-      if (aa < bb) return 1;
-      return -1
+      if (aa < bb) {
+        return 1;
+      }
+      return -1;
     });
-
 
     return tabData.studies.map(
       ({ studyInstanceUid, date, description, numInstances, modalities, displaySets }) => {
@@ -93,7 +94,6 @@ const StudyBrowser = ({
       <div
         className="w-100 border-secondary-light bg-primary-dark flex h-20 flex-col items-center justify-center gap-2 border-b p-4"
         data-cy={'studyBrowser-panel'}
-        style={{ display: 'none', visibility: 'hidden' }}
       >
         {/* TODO Revisit design of LegacyButtonGroup later - for now use LegacyButton for its children.*/}
         <LegacyButtonGroup
