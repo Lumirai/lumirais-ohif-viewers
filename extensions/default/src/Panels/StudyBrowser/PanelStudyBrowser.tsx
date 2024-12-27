@@ -31,7 +31,8 @@ function PanelStudyBrowser({
   const { StudyInstanceUIDs } = useImageViewer();
   const [{ activeViewportId, viewports, isHangingProtocolLayout }, viewportGridService] =
     useViewportGrid();
-  const [activeTabName, setActiveTabName] = useState('all');
+  // Changed from 'all'. Found in createStudyBrowserTabs.ts
+  const [activeTabName, setActiveTabName] = useState('primary');
   const [expandedStudyInstanceUIDs, setExpandedStudyInstanceUIDs] = useState([
     ...StudyInstanceUIDs,
   ]);
